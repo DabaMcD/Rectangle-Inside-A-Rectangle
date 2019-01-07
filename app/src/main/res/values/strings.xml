@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">RectanglesInsideARectangle</string>
+    <string name="piece_length">Piece length (in)</string>
+    <string name="piece_height">Piece height (in)</string>
+    <string name="canvas_length">Canvas length (in)</string>
+    <string name="canvas_height">Canvas height (in)</string>
+    <string name="_31_1">31.1</string>
+    <string name="_15_1">15.1</string>
+    <string name="_19_5">19.5</string>
+    <string name="_4">4</string>
+    <string name="go">GO</string>
+</resources>
