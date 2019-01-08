@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         } else if(T > W) {
             noneFitError();
             return true;
+        } else if(pieceLength.getText().toString().equals("") || pieceHeight.getText().toString().equals("") || canvasLength.getText().toString().equals("") || canvasHeight.getText().toString().equals("")) {
+            boxEmptyError();
+            return true;
         }
         return false;
     }
@@ -82,16 +85,16 @@ public class MainActivity extends AppCompatActivity {
         errorText.setVisibility(View.VISIBLE);
     }
     private void tooShortError() {
-        if(C < H) {
-            errorText.setText("The piece length must be more than the canvas height");
-            errorText.setVisibility(View.VISIBLE);
-        }
+        errorText.setText("The piece length must be more than the canvas height");
+        errorText.setVisibility(View.VISIBLE);
     }
     private void noneFitError() {
-        if(T > W) {
             errorText.setText("The piece cannot fit in the canvas at all");
             errorText.setVisibility(View.VISIBLE);
-        }
+    }
+    private void boxEmptyError() {
+        errorText.setText("All boxes must be filled out");
+        errorText.setVisibility(View.VISIBLE);
     }
     private void showAnswers() {
         Intent intent = new Intent(getBaseContext(), AnswerActivity.class);

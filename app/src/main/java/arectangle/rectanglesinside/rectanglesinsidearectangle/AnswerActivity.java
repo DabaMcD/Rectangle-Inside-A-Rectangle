@@ -18,6 +18,13 @@ public class AnswerActivity extends AppCompatActivity {
         Screen.width = displayMetrics.widthPixels;
 
         answerView = findViewById(R.id.answerView);
-        answerView.draw();
+        answerView.draw(
+                Float.parseFloat(getIntent().getStringExtra("C")),
+                Float.parseFloat(getIntent().getStringExtra("B")),
+                Float.parseFloat(getIntent().getStringExtra("H")),
+                Float.parseFloat(getIntent().getStringExtra("W")),
+                Float.parseFloat(getIntent().getStringExtra("c")),
+                Float.parseFloat(getIntent().getStringExtra("x"))
+        );
     }
 }
