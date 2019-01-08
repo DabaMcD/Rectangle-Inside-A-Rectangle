@@ -94,6 +94,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void showAnswers() {
-        startActivity(new Intent(this, AnswerActivity.class));
+        Intent intent = new Intent(getBaseContext(), AnswerActivity.class);
+        intent.putExtra("C", C);
+        intent.putExtra("B", B);
+        intent.putExtra("c", c);
+        intent.putExtra("H", H);
+        intent.putExtra("W", W);
+        intent.putExtra("x", x);
+        startActivity(intent);
     }
 }
