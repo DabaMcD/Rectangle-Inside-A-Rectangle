@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         errorText.setVisibility(View.VISIBLE);
     }
     private void tooShortError() {
-        errorText.setText("The piece length must be more than the canvas height");
+        errorText.setText("The piece length must be more than the canvas width");
         errorText.setVisibility(View.VISIBLE);
     }
     private void noneFitError() {
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         errorText.setVisibility(View.VISIBLE);
     }
     private void tooTallError() {
-        errorText.setText("The piece is too tall to wide it the canvas");
+        errorText.setText("The piece is too wide to fit it the canvas");
         errorText.setVisibility(View.VISIBLE);
     }
     private void wrongDimsError() {
@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("x", x);
         intent.putExtra("E", E);
         intent.putExtra("O", O);
+        intent.putExtra("T", T);
         startActivity(intent);
     }
 }
