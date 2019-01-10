@@ -35,8 +35,9 @@ public class AnswerView extends View {
         paint.setColor(Color.WHITE);
         canvas.drawRect(0, 0, W, H, paint);
         canvas.save();
-        canvas.rotate(-x, W - B, Screen.width / 4);
-        paint.setColor(Color.rgb(255, 255 / 2, 0));
+        canvas.translate(W - B, 0);
+        canvas.rotate((float) Math.toDegrees(x));
+        paint.setColor(Color.rgb(255, 127, 0));
         canvas.drawRect(0, 0, C, c, paint);
         canvas.restore();
         canvas.restore();

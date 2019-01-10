@@ -66,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
         } else if(T > W) {
             noneFitError();
             return true;
+        } else if(c > H) {
+            tooTallError();
+            return true;
+        } else if(c > C || H > W) {
+            wrongDimsError();
+            return true;
         }
         return false;
     }
@@ -95,6 +101,14 @@ public class MainActivity extends AppCompatActivity {
     }
     private void boxEmptyError() {
         errorText.setText("All boxes must be filled out");
+        errorText.setVisibility(View.VISIBLE);
+    }
+    private void tooTallError() {
+        errorText.setText("The piece is too tall to wide it the canvas");
+        errorText.setVisibility(View.VISIBLE);
+    }
+    private void wrongDimsError() {
+        errorText.setText("The length is always the longer dimension");
         errorText.setVisibility(View.VISIBLE);
     }
     private void showAnswers() {
