@@ -24,7 +24,9 @@ public class AnswerActivity extends AppCompatActivity {
                 (float) getIntent().getDoubleExtra("H", 0),
                 (float) getIntent().getDoubleExtra("W", 0),
                 (float) getIntent().getDoubleExtra("c", 0),
-                (float) getIntent().getDoubleExtra("x", 0)
+                getIntent().getDoubleExtra("x", 0),
+                getIntent().getDoubleExtra("E", 0),
+                getIntent().getDoubleExtra("O", 0)
         );
     }
 }

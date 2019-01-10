@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private double
             H, // Canvas height
             W, // Canvas width
+            O, // The offset between two adjacent pieces in the dimension in which the pieces are oriented
+            E, // The offset between two adjacent pieces in the horizontal dimension
             C, // Piece length
             c, // Piece height, AKA the hypotenuse of the triangle made by [the right side of the piece] and [the bottom right corner of the canvas]
             a, // Bottom side of the triangle made by [the right side of the piece] and [the bottom right corner of the canvas]
@@ -86,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         b = c * Math.cos(x);
         B = J + a;
         T = B + a;
+        E = c / Math.sin(x);
+        O = c / Math.tan(x);
     }
     private void aboveZeroError() {
         errorText.setText("All values must be more than or equal to zero");
@@ -119,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("H", H);
         intent.putExtra("W", W);
         intent.putExtra("x", x);
+        intent.putExtra("E", E);
+        intent.putExtra("O", O);
         startActivity(intent);
     }
 }

@@ -9,7 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class AnswerView extends View {
-    private float C, B, H, W, c, x;
+    private float C, B, H, W, c;
+    private double x, O, E;
     private Paint paint;
 
     public AnswerView(Context context) {
@@ -44,13 +45,15 @@ public class AnswerView extends View {
 
         super.onDraw(canvas);
     }
-    void draw(float C, float B, float H, float W, float c, float x) {
+    void draw(float C, float B, float H, float W, float c, double x, double E, double O) {
         this.C = C;
         this.B = B;
         this.H = H;
         this.W = W;
         this.c = c;
         this.x = x;
+        this.E = E;
+        this.O = O;
         invalidate();
         requestLayout();
     }
