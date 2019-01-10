@@ -32,7 +32,7 @@ public class AnswerView extends View {
         canvas.save();
         canvas.translate(Screen.width / 4, Screen.height / 4);
         canvas.scale(Screen.width / (2 * W), Screen.width / (2 * W));
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.WHITE);
         canvas.drawRect(0, 0, W, H, paint);
         canvas.save();
         canvas.rotate(-x, W - B, Screen.width / 4);

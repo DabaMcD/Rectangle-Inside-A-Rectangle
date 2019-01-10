@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
     public void onGoClick(View v) {
         errorText.setVisibility(View.INVISIBLE);
 
+        if(pieceLength.getText().toString().equals("") || pieceHeight.getText().toString().equals("") || canvasLength.getText().toString().equals("") || canvasHeight.getText().toString().equals("")) {
+            boxEmptyError();
+            return;
+        }
         C = Double.parseDouble(pieceLength.getText().toString());
         c = Double.parseDouble(pieceHeight.getText().toString());
         W = Double.parseDouble(canvasLength.getText().toString());
@@ -61,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if(T > W) {
             noneFitError();
-            return true;
-        } else if(pieceLength.getText().toString().equals("") || pieceHeight.getText().toString().equals("") || canvasLength.getText().toString().equals("") || canvasHeight.getText().toString().equals("")) {
-            boxEmptyError();
             return true;
         }
         return false;

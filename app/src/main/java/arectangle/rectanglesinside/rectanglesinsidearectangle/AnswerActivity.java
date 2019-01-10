@@ -19,12 +19,12 @@ public class AnswerActivity extends AppCompatActivity {
 
         answerView = findViewById(R.id.answerView);
         answerView.draw(
-                Float.parseFloat(getIntent().getStringExtra("C")),
-                Float.parseFloat(getIntent().getStringExtra("B")),
-                Float.parseFloat(getIntent().getStringExtra("H")),
-                Float.parseFloat(getIntent().getStringExtra("W")),
-                Float.parseFloat(getIntent().getStringExtra("c")),
-                Float.parseFloat(getIntent().getStringExtra("x"))
+                (float) getIntent().getDoubleExtra("C", 0),
+                (float) getIntent().getDoubleExtra("B", 0),
+                (float) getIntent().getDoubleExtra("H", 0),
+                (float) getIntent().getDoubleExtra("W", 0),
+                (float) getIntent().getDoubleExtra("c", 0),
+                (float) getIntent().getDoubleExtra("x", 0)
         );
     }
 }
