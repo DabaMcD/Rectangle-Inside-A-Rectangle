@@ -1,5 +1,6 @@
 package arectangle.rectanglesinside.rectanglesinsidearectangle;
 
+import android.bluetooth.BluetoothA2dp;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -63,13 +64,14 @@ public class AnswerView extends View {
             // The vertical line of the measurement between the leftmost edge of a piece and the rightmost side of the canvas
             canvas.drawLine((float) -a, (float) (-a * i * 1.25 - a * 0.5), (float) -a, (float) (-a * i * 1.25 - a * 2), paint);
 
-            double verticalHalfPoint = (float) (-a * i * 1.25 - a * 1.25); // Represents the vertical level at which the horizontal line of the measurement is drawn
+            canvas.translate(0, (float) (-a * i * 1.25 - a * 1.25)); // Represents the vertical level at which the horizontal line of the measurement is drawn
             // The horizontal line of the measurement
-            canvas.drawLine((float) -a, (float) verticalHalfPoint, (float) (B + (E * i)), (float) verticalHalfPoint, paint);
+            canvas.drawLine((float) -a, 0, (float) (B + (E * i)), 0, paint);
 
             // The measurement text of the measurement
             double horizontalHalfPoint = (float) ((-a + B + (E * i)) / 2);
-            canvas.drawText(String.valueOf(Math.round((a + B + (E * i)) * 100d) / 100d), (float) horizontalHalfPoint, (float) (verticalHalfPoint + paint.getTextSize() / 3), paint);
+            canvas.translate(0, paint.getTextSize() / 3);
+            canvas.drawText(String.valueOf(Math.round((a + B + (E * i)) * 100d) / 100d), (float) horizontalHalfPoint, 0, paint);
 
             canvas.restore();
 
