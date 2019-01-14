@@ -1,6 +1,5 @@
 package arectangle.rectanglesinside.rectanglesinsidearectangle;
 
-import android.bluetooth.BluetoothA2dp;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -32,64 +31,34 @@ public class AnswerView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
+        paint.setColor(Color.DKGRAY);
+        canvas.drawPaint(paint);
+
         // Do some translating and scaling
         canvas.save();
         canvas.translate(Screen.width / 4, Screen.height / 4);
         canvas.scale(Screen.width / (2 * W), Screen.width / (2 * W));
 
-        // The text size should never change after this
-        paint.setTextSize((float) (b / 2));
-        paint.setTypeface(Typeface.MONOSPACE);
-
         // Draw the canvas
         paint.setColor(Color.WHITE);
         canvas.drawRect(0, 0, W, H, paint);
 
+        // The text size should never change after this
+        paint.setTextSize(c / 2);
+        paint.setTypeface(Typeface.MONOSPACE);
+
         // Do some more transformations
-        canvas.save();
         canvas.translate(W - B, 0);
 
-        // Draw the piece(s)
-        paint.setColor(Color.rgb(255, 127, 0));
-        paint.setTextAlign(Paint.Align.CENTER);
-        int i = 0; // This is a while loop so that the variable "i" can be used later
-        while(T + E * i <= W) {
-            canvas.save();
-            canvas.translate((float) (-E * i), 0);
-            canvas.save();
-            canvas.rotate((float) Math.toDegrees(x));
-            canvas.drawRect(0, 0, C, c, paint);
-            canvas.restore();
+        // Draw the piece(s) and show measurements of the length that multiple pieces take up
+        drawPiecesAndPieceMeasurements(canvas);
 
-            // The vertical line of the measurement between the leftmost edge of a piece and the rightmost side of the canvas
-            canvas.drawLine((float) -a, (float) (-a * i * 1.25 - a * 0.5), (float) -a, (float) (-a * i * 1.25 - a * 2), paint);
+        // Draw the angle & angle text
+        drawAngleMeasurement(canvas);
 
-            canvas.translate(0, (float) (-a * i * 1.25 - a * 1.25)); // Represents the vertical level at which the horizontal line of the measurement is drawn
-            // The horizontal line of the measurement
-            canvas.drawLine((float) -a, 0, (float) (B + (E * i)), 0, paint);
+        // Draw the piece offset measurement
+        drawOffsetMeasurement(canvas);
 
-            // The measurement text of the measurement
-            double horizontalHalfPoint = (float) ((-a + B + (E * i)) / 2);
-            canvas.translate(0, paint.getTextSize() / 3);
-            canvas.drawText(String.valueOf(Math.round((a + B + (E * i)) * 100d) / 100d), (float) horizontalHalfPoint, 0, paint);
-
-            canvas.restore();
-
-            i ++;
-        }
-
-        canvas.drawLine(B, 0, B, (float) (-a * (i - 1) * 1.25 - a * 2), paint);
-
-        float arcRad = B / 6;
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(arcRad / 6);
-        canvas.drawArc(-arcRad, -arcRad, arcRad, arcRad, 0, (float) Math.toDegrees(x), false, paint);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText(String.valueOf(Math.round(Math.toDegrees(x) * 100d) / 100d) + "°", (float) (Math.cos(x / 2) * arcRad * 1.5), (float) (Math.sin(x / 2) * arcRad * 1.5 + paint.getTextSize() * 2 / 3), paint);
-
-        // Reset everything
-        canvas.restore();
         canvas.restore();
 
         super.onDraw(canvas);
@@ -108,5 +77,66 @@ public class AnswerView extends View {
         this.b = b;
         invalidate();
         requestLayout();
+    }
+    private void drawPiecesAndPieceMeasurements(Canvas canvas) {
+        paint.setColor(Color.rgb(255, 127, 0));
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setStrokeWidth(B / 100);
+        int i = 0; // This is a while loop so that the variable "i" can be used later
+        while(T + E * i <= W) {
+            canvas.save();
+            canvas.translate((float) (-E * i), 0);
+            canvas.save();
+            canvas.rotate((float) Math.toDegrees(x));
+            canvas.drawRect(0, 0, C, c, paint);
+            canvas.restore();
+
+            // The vertical line of the measurement between the leftmost edge of a piece and the rightmost side of the canvas
+            canvas.drawLine((float) -a, (float) (-a * i * 1.25 - a * 0.5), (float) -a, (float) (-a * i * 1.25 - a * 2), paint);
+
+            canvas.translate(0, (float) (-a * i * 1.25 - a * 1.25)); // Represents the vertical level at which the horizontal line of the measurement is drawn
+            // The horizontal line of the measurement
+            canvas.drawLine((float) -a, 0, (float) (B + (E * i)), 0, paint);
+
+            // The measurement text of the measurement
+            drawTextAndRect(String.valueOf(Math.round((a + B + (E * i)) * 100d) / 100d), (float) ((-a + B + (E * i)) / 2), 0, canvas);
+
+            canvas.restore();
+
+            i ++;
+        }
+        canvas.drawLine(B, 0, B, (float) (-a * (i - 1) * 1.25 - a * 2), paint);
+    }
+    private void drawAngleMeasurement(Canvas canvas) {
+        float arcRad = B / 6;
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(arcRad / 6);
+        canvas.drawArc(-arcRad, -arcRad, arcRad, arcRad, 0, (float) Math.toDegrees(x), false, paint);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText(String.valueOf(Math.round(Math.toDegrees(x) * 100d) / 100d) + "°", (float) (Math.cos(x / 2) * arcRad * 1.5), (float) (Math.sin(x / 2) * arcRad * 1.5 + paint.getTextSize() * 2 / 3), paint);
+    }
+    private void drawOffsetMeasurement(Canvas canvas) {
+        paint.setStrokeWidth(B / 100);
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.save();
+        canvas.translate((float) (B - a), B);
+        canvas.rotate((float) Math.toDegrees(x));
+        canvas.translate(0, c);
+        canvas.drawLine(0, 0, 0, c, paint);
+        canvas.drawLine((float) -O, (float) 0, (float) -O, c, paint);
+        canvas.drawLine((float) -O, c / 2, 0, c / 2, paint);
+        drawTextAndRect(String.valueOf(Math.round(O * 100d) / 100d), (float) (-O / 2), c / 2, canvas);
+        canvas.restore();
+    }
+    private void drawTextAndRect(String text, float x, float y, Canvas canvas) {
+        canvas.save();
+        canvas.translate(x, y);
+        paint.setColor(Color.DKGRAY);
+        canvas.drawRect(-paint.measureText(text) * 3 / 4, -paint.getTextSize() / 2, paint.measureText(text) * 3 / 4, paint.getTextSize() / 2, paint);
+        paint.setColor(Color.rgb(255, 127, 0));
+        canvas.translate(0, paint.getTextSize() / 3);
+        canvas.drawText(text, 0, 0, paint);
+        canvas.restore();
     }
 }
