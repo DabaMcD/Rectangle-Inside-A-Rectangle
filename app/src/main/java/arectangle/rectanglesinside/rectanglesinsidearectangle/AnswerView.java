@@ -13,6 +13,7 @@ public class AnswerView extends View {
     private float C, B, H, W, c;
     private double x, O, E, T, a, b;
     private Paint paint;
+    private int orange = Color.rgb(255, 127, 0);
 
     public AnswerView(Context context) {
         super(context);
@@ -39,9 +40,8 @@ public class AnswerView extends View {
         canvas.translate(Screen.width / 4f, Screen.height / 4f);
         canvas.scale(Screen.width / (2 * W), Screen.width / (2 * W));
 
-        // Draw the canvas
-        paint.setColor(Color.WHITE);
-        canvas.drawRect(0, 0, W, H, paint);
+        // Draw canvas and canvas measurements
+        drawCanvasAndMeasurements(canvas);
 
         // The text size should never change after this
         paint.setTextSize(c / 2);
@@ -79,7 +79,7 @@ public class AnswerView extends View {
         requestLayout();
     }
     private void drawPiecesAndPieceMeasurements(Canvas canvas) {
-        paint.setColor(Color.rgb(255, 127, 0));
+        paint.setColor(orange);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setStrokeWidth(B / 100);
         int i = 0; // This is a while loop so that the variable "i" can be used later
@@ -106,6 +106,12 @@ public class AnswerView extends View {
             i ++;
         }
         canvas.drawLine(B, 0, B, (float) (-a * (i - 1) * 1.25 - a * 2), paint);
+    }
+    private void drawCanvasAndMeasurements(Canvas canvas) {
+        paint.setColor(Color.WHITE);
+        canvas.drawRect(0, 0, W, H, paint);
+        paint.setColor(orange);
+        canvas.drawLine((float) (W * 1.05), 0, (float) (W * 1.2), 0, paint);
     }
     private void drawAngleMeasurement(Canvas canvas) {
         float arcRad = B / 6;
@@ -134,7 +140,7 @@ public class AnswerView extends View {
         canvas.translate(x, y);
         paint.setColor(Color.DKGRAY);
         canvas.drawRect(-paint.measureText(text) * 3 / 4, -paint.getTextSize() / 2, paint.measureText(text) * 3 / 4, paint.getTextSize() / 2, paint);
-        paint.setColor(Color.rgb(255, 127, 0));
+        paint.setColor(orange);
         canvas.translate(0, paint.getTextSize() / 3);
         canvas.drawText(text, 0, 0, paint);
         canvas.restore();
