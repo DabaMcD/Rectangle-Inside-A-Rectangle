@@ -36,7 +36,7 @@ public class AnswerView extends View {
 
         // Do some translating and scaling
         canvas.save();
-        canvas.translate(Screen.width / 4, Screen.height / 4);
+        canvas.translate(Screen.width / 4f, Screen.height / 4f);
         canvas.scale(Screen.width / (2 * W), Screen.width / (2 * W));
 
         // Draw the canvas
