@@ -17,21 +17,27 @@ public class AnswerView extends View {
 
     public AnswerView(Context context) {
         super(context);
-        paint = new Paint();
-        paint.setAntiAlias(true);
+        init();
     }
     public AnswerView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        paint = new Paint();
-        paint.setAntiAlias(true);
+        init();
     }
     public AnswerView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+    private void init() {
         paint = new Paint();
         paint.setAntiAlias(true);
+        paint.setTypeface(Typeface.MONOSPACE);
+        paint.setTextAlign(Paint.Align.CENTER);
     }
     @Override
     protected void onDraw(Canvas canvas) {
+        // This setTextSize command can't be moved to the constructor because it
+        // The text size should never change after this
+        paint.setTextSize(c / 2);
         paint.setColor(Color.DKGRAY);
         canvas.drawPaint(paint);
 
@@ -43,15 +49,11 @@ public class AnswerView extends View {
         // Draw canvas and canvas measurements
         drawCanvasAndMeasurements(canvas);
 
-        // The text size should never change after this
-        paint.setTextSize(c / 2);
-        paint.setTypeface(Typeface.MONOSPACE);
-
         // Do some more transformations
         canvas.translate(W - B, 0);
 
         // Draw the piece(s) and show measurements of the length that multiple pieces take up
-        drawPiecesAndPieceMeasurements(canvas);
+        drawPiecesAndMeasurements(canvas);
 
         // Draw the angle & angle text
         drawAngleMeasurement(canvas);
@@ -78,9 +80,8 @@ public class AnswerView extends View {
         invalidate();
         requestLayout();
     }
-    private void drawPiecesAndPieceMeasurements(Canvas canvas) {
+    private void drawPiecesAndMeasurements(Canvas canvas) {
         paint.setColor(orange);
-        paint.setTextAlign(Paint.Align.CENTER);
         paint.setStrokeWidth(B / 100);
         int i = 0; // This is a while loop so that the variable "i" can be used later
         while(T + E * i <= W) {
@@ -112,6 +113,16 @@ public class AnswerView extends View {
         canvas.drawRect(0, 0, W, H, paint);
         paint.setColor(orange);
         canvas.drawLine((float) (W * 1.05), 0, (float) (W * 1.2), 0, paint);
+        canvas.drawLine((float) (W * 1.05), H, (float) (W * 1.2), H, paint);
+        float horizontalMidpoint = (float) (W * 1.125);
+        canvas.drawLine(horizontalMidpoint, 0, horizontalMidpoint, H, paint);
+
+        // Rotate so as to show text properly
+//        canvas.save();
+//        canvas.translate(horizontalMidpoint, H / 2);
+//        canvas.rotate(90);
+//        drawTextAndRect(String.valueOf(H), 0, 0, canvas);
+//        canvas.restore();
     }
     private void drawAngleMeasurement(Canvas canvas) {
         float arcRad = B / 6;
@@ -119,12 +130,10 @@ public class AnswerView extends View {
         paint.setStrokeWidth(arcRad / 6);
         canvas.drawArc(-arcRad, -arcRad, arcRad, arcRad, 0, (float) Math.toDegrees(x), false, paint);
         paint.setStyle(Paint.Style.FILL);
-        paint.setTextAlign(Paint.Align.LEFT);
         canvas.drawText(String.valueOf(Math.round(Math.toDegrees(x) * 100d) / 100d) + "°", (float) (Math.cos(x / 2) * arcRad * 1.5), (float) (Math.sin(x / 2) * arcRad * 1.5 + paint.getTextSize() * 2 / 3), paint);
     }
     private void drawOffsetMeasurement(Canvas canvas) {
         paint.setStrokeWidth(B / 100);
-        paint.setTextAlign(Paint.Align.CENTER);
         canvas.save();
         canvas.translate((float) (B - a), B);
         canvas.rotate((float) Math.toDegrees(x));
