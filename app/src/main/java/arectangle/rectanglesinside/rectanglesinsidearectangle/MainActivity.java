@@ -18,16 +18,16 @@ public class MainActivity extends AppCompatActivity {
             O, // The offset between two adjacent pieces in the dimension in which the pieces are oriented
             E, // The offset between two adjacent pieces in the horizontal dimension
             C, // Piece length
-            c, // Piece height, AKA the hypotenuse of the triangle made by [the right side of the piece] and [the bottom right corner of the canvas]
-            a, // Bottom side of the triangle made by [the right side of the piece] and [the bottom right corner of the canvas]
-            b, // Right side of the triangle made by [the right side of the piece] and [the bottom right corner of the canvas]
-            B, // Distance between the intersection of [canvas's top and piece's upper left corner] and [the upper right corner of the canvas]
-            T, // Horizontal distance between [the bottom left corner of the piece] and [the upper right corner of the canvas]
+            c, // Piece height, AKA the hypotenuse of the triangle made by [the lower right side of the piece] and [the bottom right corner of the canvas]
+            a, // Bottom side of the triangle made by [the lower right side of the piece] and [the bottom right corner of the canvas]
+            b, // Right side of the triangle made by [the lower right side of the piece] and [the bottom right corner of the canvas]
+            B, // Distance between the intersection of [canvas's top and piece's upper corner] and [the upper right corner of the canvas]
+            T, // Horizontal distance between [the left corner of the piece] and [the upper right corner of the canvas]
             J, // Horizontal distance between piece's [upper left and bottom right] corners
-            D, // The piece's length along the diagonal, AKA the distance between the piece's [upper left and bottom right] corners
-            x, // The angle that the piece makes with the horizontal
-            y, // The angle that the line along the piece's diagonal makes with the top and bottom of the piece
-            z; // The angle that the line along the piece's diagonal makes with the top of the canvas
+            D, // The piece's length along the diagonal, AKA the distance between the piece's [upper and bottom] corners
+            x, // The angle (radians) which the piece makes with the horizontal
+            y, // The angle (radians) that the line along the piece's diagonal makes with the top and bottom of the piece
+            z; // The angle (radians) that the line along the piece's diagonal makes with the top of the canvas
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

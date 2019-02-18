@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class AnswerView extends View {
+    // If you want to know what these one-letter variables mean, consult MainActivity lines 16-30
     private float C, B, H, W, c;
     private double x, // Is in radians
             O, E, T, a, b;
@@ -38,29 +39,34 @@ public class AnswerView extends View {
     protected void onDraw(Canvas canvas) {
         // This setTextSize command can't be moved to the constructor because it
         // The text size should never change after this
-        paint.setTextSize(c / 2);
+        paint.setTextSize(c / 2); // todo: fiddle with setting this size based on W
         paint.setColor(Color.DKGRAY);
         canvas.drawPaint(paint);
 
-        // Do some translating and scaling
+        // Draw stuff on upper canvas
         canvas.save();
+
+        // Do some translating and scaling
         canvas.translate(Screen.width / 4f, Screen.height / 4f);
         canvas.scale(Screen.width / (2 * W), Screen.width / (2 * W));
 
-        // Draw canvas and canvas measurements
-        drawCanvasAndMeasurements(canvas);
+        drawCanvas(canvas); // Draw canvas and canvas measurements
+        canvas.translate(W - B, 0); // Do some more transformations
+        drawPiecesAndMeasurements(canvas); // Draw the piece(s) and show measurements of the length that multiple pieces take up
+        drawAngleMeasurement(canvas); // Draw the angle & angle text
+        drawOffsetMeasurement(canvas); // Draw the piece offset measurement
 
-        // Do some more transformations
-        canvas.translate(W - B, 0);
+        canvas.restore();
 
-        // Draw the piece(s) and show measurements of the length that multiple pieces take up
-        drawPiecesAndMeasurements(canvas);
+        // Draw stuff on lower canvas
+        canvas.save();
 
-        // Draw the angle & angle text
-        drawAngleMeasurement(canvas);
-
-        // Draw the piece offset measurement
-        drawOffsetMeasurement(canvas);
+        // Do some translating and scaling
+        canvas.translate(Screen.width / 4f, Screen.height * 3f / 4f);
+        canvas.scale(Screen.width / (2 * W), Screen.width / (2 * W));
+        drawCanvas(canvas);
+        drawCanvasMeasurements(canvas);
+        drawSinglePieceWithMeasurements(canvas);
 
         canvas.restore();
 
@@ -107,15 +113,18 @@ public class AnswerView extends View {
 
             i ++;
         }
-        canvas.drawLine(B, 0, B, (float) (-a * (i - 1) * 1.25 - a * 2), paint);
+        canvas.drawLine(B, 0, B, (float) (-a * (i - 1) * 1.25 - a * 2), paint); // Line going up vertically from upper right corner of canvas
     }
-    private void drawCanvasAndMeasurements(Canvas canvas) {
+    private void drawCanvas(Canvas canvas) {
         paint.setColor(Color.WHITE);
         canvas.drawRect(0, 0, W, H, paint);
+    }
+    private void drawCanvasMeasurements(Canvas canvas) {
+        // Vertical measurement
         paint.setColor(orange);
-        canvas.drawLine((float) (W * 1.05), 0, (float) (W * 1.2), 0, paint);
-        canvas.drawLine((float) (W * 1.05), H, (float) (W * 1.2), H, paint);
-        float horizontalMidpoint = (float) (W * 1.125);
+        canvas.drawLine((float) (W * -0.05), 0, (float) (W * -0.2), 0, paint);
+        canvas.drawLine((float) (W * -0.05), H, (float) (W * -0.2), H, paint);
+        float horizontalMidpoint = (float) (W * -0.125);
         canvas.drawLine(horizontalMidpoint, 0, horizontalMidpoint, H, paint);
 
         // Rotate so as to show text properly
@@ -131,6 +140,21 @@ public class AnswerView extends View {
         canvas.rotate(89.999f);
 
         drawTextAndRect(String.valueOf(H), 0, 0, canvas);
+        canvas.restore();
+
+        // Horizontal measurement
+        canvas.drawLine(0, (float) (-W * 0.05), 0, (float) (-W * 0.2), paint);
+        canvas.drawLine(W, (float) (-W * 0.05), W, (float) (-W * 0.2), paint);
+        float verticalMidpoint = (float) (-W * 0.125);
+        canvas.drawLine(0, verticalMidpoint, W, verticalMidpoint, paint);
+        drawTextAndRect(String.valueOf(H), W / 2, verticalMidpoint, canvas);
+    }
+    private void drawSinglePieceWithMeasurements(Canvas canvas) {
+        canvas.save();
+        canvas.translate(W - B, 0);
+        canvas.rotate((float) Math.toDegrees(x));
+        canvas.drawRect(0, 0, C, c, paint);
+
         canvas.restore();
     }
     private void drawAngleMeasurement(Canvas canvas) {
