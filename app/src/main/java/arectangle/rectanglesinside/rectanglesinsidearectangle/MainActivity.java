@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     // In this case, the outer rectangle is the canvas, and the inner rect is the piece
     // I may use hard brackets the way you would use parentheses in math, just to clarify complicated sentences.
     private double
-            H, // Canvas height
+            L, // Canvas height
             W, // Canvas width
             O, // The offset between two adjacent pieces in the dimension in which the pieces are oriented
             E, // The offset between two adjacent pieces in the horizontal dimension
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         C = Double.parseDouble(pieceLength.getText().toString());
         c = Double.parseDouble(pieceHeight.getText().toString());
         W = Double.parseDouble(canvasLength.getText().toString());
-        H = Double.parseDouble(canvasHeight.getText().toString());
+        L = Double.parseDouble(canvasHeight.getText().toString());
 
         calculateStuff();
 
@@ -59,19 +59,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private boolean checkValidValues() {
-        if(C <= 0 || c <= 0 || W <= 0 || H <= 0) {
+        if(C <= 0 || c <= 0 || W <= 0 || L <= 0) {
             aboveZeroError();
             return true;
-        } else if(C < H) {
+        } else if(C < L) {
             tooShortError();
             return true;
         } else if(T > W) {
             noneFitError();
             return true;
-        } else if(c > H) {
+        } else if(c > L) {
             tooTallError();
             return true;
-        } else if(c > C || H > W) {
+        } else if(c > C || L > W) {
             wrongDimsError();
             return true;
         }
@@ -80,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
     private void calculateStuff() {
         // Just define the stuff
         D = Math.sqrt(c*c + C*C); // Simple pythagorean theorem
-        J = Math.sqrt(D*D - H*H); // Don't ya just love triangles
+        J = Math.sqrt(D*D - L*L); // Don't ya just love triangles
         y = Math.asin(c / D);
-        z = Math.asin(H / D);
+        z = Math.asin(L / D);
         x = z - y;
         a = c * Math.sin(x);
         b = c * Math.cos(x);
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("C", C);
         intent.putExtra("B", B);
         intent.putExtra("c", c);
-        intent.putExtra("H", H);
+        intent.putExtra("L", L);
         intent.putExtra("W", W);
         intent.putExtra("x", x);
         intent.putExtra("E", E);

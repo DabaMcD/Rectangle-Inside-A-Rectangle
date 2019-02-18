@@ -21,7 +21,7 @@ public class AnswerActivity extends AppCompatActivity {
         answerView.draw(
                 (float) getIntent().getDoubleExtra("C", 0),
                 (float) getIntent().getDoubleExtra("B", 0),
-                (float) getIntent().getDoubleExtra("H", 0),
+                (float) getIntent().getDoubleExtra("L", 0),
                 (float) getIntent().getDoubleExtra("W", 0),
                 (float) getIntent().getDoubleExtra("c", 0),
                 getIntent().getDoubleExtra("x", 0),

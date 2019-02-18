@@ -11,7 +11,7 @@ import android.view.View;
 
 public class AnswerView extends View {
     // If you want to know what these one-letter variables mean, consult MainActivity lines 16-30
-    private float C, B, H, W, c;
+    private float C, B, L, W, c;
     private double x, // Is in radians
             O, E, T, a, b;
     private Paint paint;
@@ -72,10 +72,10 @@ public class AnswerView extends View {
 
         super.onDraw(canvas);
     }
-    void draw(float C, float B, float H, float W, float c, double x, double E, double O, double T, double a, double b) {
+    void draw(float C, float B, float L, float W, float c, double x, double E, double O, double T, double a, double b) {
         this.C = C;
         this.B = B;
-        this.H = H;
+        this.L = L;
         this.W = W;
         this.c = c;
         this.x = x;
@@ -117,19 +117,19 @@ public class AnswerView extends View {
     }
     private void drawCanvas(Canvas canvas) {
         paint.setColor(Color.WHITE);
-        canvas.drawRect(0, 0, W, H, paint);
+        canvas.drawRect(0, 0, W, L, paint);
     }
     private void drawCanvasMeasurements(Canvas canvas) {
         // Vertical measurement
         paint.setColor(orange);
         canvas.drawLine((float) (W * -0.05), 0, (float) (W * -0.2), 0, paint);
-        canvas.drawLine((float) (W * -0.05), H, (float) (W * -0.2), H, paint);
+        canvas.drawLine((float) (W * -0.05), L, (float) (W * -0.2), L, paint);
         float horizontalMidpoint = (float) (W * -0.125);
-        canvas.drawLine(horizontalMidpoint, 0, horizontalMidpoint, H, paint);
+        canvas.drawLine(horizontalMidpoint, 0, horizontalMidpoint, L, paint);
 
         // Rotate so as to show text properly
         canvas.save();
-        canvas.translate(horizontalMidpoint, H / 2);
+        canvas.translate(horizontalMidpoint, L / 2);
 
         // For some WEIRD reason,
         // if I rotate the canvas by more than 90 degrees or less than -90 degrees,
@@ -139,15 +139,15 @@ public class AnswerView extends View {
         // That's why I put 89.999 instead of 90.
         canvas.rotate(89.999f);
 
-        drawTextAndRect(String.valueOf(H), 0, 0, canvas);
+        drawTextAndRect(String.valueOf(L), 0, 0, canvas);
         canvas.restore();
 
         // Horizontal measurement
         canvas.drawLine(0, (float) (-W * 0.05), 0, (float) (-W * 0.2), paint);
-        canvas.drawLine(W, (float) (-W * 0.05), W, (float) (-W * 0.2), paint);
+        canvas.drawLine(L, (float) (-W * 0.05), W, (float) (-W * 0.2), paint);
         float verticalMidpoint = (float) (-W * 0.125);
         canvas.drawLine(0, verticalMidpoint, W, verticalMidpoint, paint);
-        drawTextAndRect(String.valueOf(H), W / 2, verticalMidpoint, canvas);
+        drawTextAndRect(String.valueOf(L), W / 2, verticalMidpoint, canvas);
     }
     private void drawSinglePieceWithMeasurements(Canvas canvas) {
         canvas.save();
