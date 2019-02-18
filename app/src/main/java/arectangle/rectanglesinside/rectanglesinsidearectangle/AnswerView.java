@@ -11,7 +11,8 @@ import android.view.View;
 
 public class AnswerView extends View {
     private float C, B, H, W, c;
-    private double x, O, E, T, a, b;
+    private double x, // Is in radians
+            O, E, T, a, b;
     private Paint paint;
     private int orange = Color.rgb(255, 127, 0);
 
@@ -118,11 +119,19 @@ public class AnswerView extends View {
         canvas.drawLine(horizontalMidpoint, 0, horizontalMidpoint, H, paint);
 
         // Rotate so as to show text properly
-//        canvas.save();
-//        canvas.translate(horizontalMidpoint, H / 2);
-//        canvas.rotate(90);
-//        drawTextAndRect(String.valueOf(H), 0, 0, canvas);
-//        canvas.restore();
+        canvas.save();
+        canvas.translate(horizontalMidpoint, H / 2);
+
+        // For some WEIRD reason,
+        // if I rotate the canvas by more than 90 degrees or less than -90 degrees,
+        // the text gets super blurry.
+        // I can't explain it at all.
+        // As soon as it gets to 90 it gets blurry.
+        // That's why I put 89.999 instead of 90.
+        canvas.rotate(89.999f);
+
+        drawTextAndRect(String.valueOf(H), 0, 0, canvas);
+        canvas.restore();
     }
     private void drawAngleMeasurement(Canvas canvas) {
         float arcRad = B / 6;
