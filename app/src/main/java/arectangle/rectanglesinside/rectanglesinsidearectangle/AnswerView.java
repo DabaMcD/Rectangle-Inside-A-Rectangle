@@ -137,9 +137,11 @@ public class AnswerView extends View {
         float arcRad = B / 6;
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(arcRad / 6);
+        paint.setTextAlign(Paint.Align.LEFT);
         canvas.drawArc(-arcRad, -arcRad, arcRad, arcRad, 0, (float) Math.toDegrees(x), false, paint);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawText(String.valueOf(Math.round(Math.toDegrees(x) * 100d) / 100d) + "°", (float) (Math.cos(x / 2) * arcRad * 1.5), (float) (Math.sin(x / 2) * arcRad * 1.5 + paint.getTextSize() * 2 / 3), paint);
+        paint.setTextAlign(Paint.Align.CENTER);
     }
     private void drawOffsetMeasurement(Canvas canvas) {
         paint.setStrokeWidth(B / 100);
