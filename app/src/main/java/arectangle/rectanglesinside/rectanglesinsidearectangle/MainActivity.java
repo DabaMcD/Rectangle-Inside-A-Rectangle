@@ -8,13 +8,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText pieceLength, pieceHeight, canvasLength, canvasHeight;
+    private EditText pieceLength, pieceWidth, canvasLength, canvasWidth;
     private TextView errorText;
     // In this case, the outer rectangle is the canvas, and the inner rect is the piece
     // I may use hard brackets the way you would use parentheses in math, just to clarify complicated sentences.
     private double
-            L, // Canvas height
-            W, // Canvas width
+            L, // Canvas length AKA longer dimension
+            W, // Canvas width AKA shorter dimension
             O, // The offset between two adjacent pieces in the dimension in which the pieces are oriented
             E, // The offset between two adjacent pieces in the horizontal dimension
             C, // Piece length
@@ -35,22 +35,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         pieceLength = findViewById(R.id.pieceLength);
-        pieceHeight = findViewById(R.id.pieceHeight);
+        pieceWidth = findViewById(R.id.pieceWidth);
         canvasLength = findViewById(R.id.canvasLength);
-        canvasHeight = findViewById(R.id.canvasHeight);
+        canvasWidth = findViewById(R.id.canvasWidth);
         errorText = findViewById(R.id.errorText);
     }
     public void onGoClick(View v) {
         errorText.setVisibility(View.INVISIBLE);
 
-        if(pieceLength.getText().toString().equals("") || pieceHeight.getText().toString().equals("") || canvasLength.getText().toString().equals("") || canvasHeight.getText().toString().equals("")) {
+        if(pieceLength.getText().toString().equals("") || pieceWidth.getText().toString().equals("") || canvasLength.getText().toString().equals("") || canvasWidth.getText().toString().equals("")) {
             boxEmptyError();
             return;
         }
         C = Double.parseDouble(pieceLength.getText().toString());
-        c = Double.parseDouble(pieceHeight.getText().toString());
-        W = Double.parseDouble(canvasLength.getText().toString());
-        L = Double.parseDouble(canvasHeight.getText().toString());
+        c = Double.parseDouble(pieceWidth.getText().toString());
+        W = Double.parseDouble(canvasWidth.getText().toString());
+        L = Double.parseDouble(canvasLength.getText().toString());
 
         calculateStuff();
 
@@ -62,16 +62,16 @@ public class MainActivity extends AppCompatActivity {
         if(C <= 0 || c <= 0 || W <= 0 || L <= 0) {
             aboveZeroError();
             return true;
-        } else if(C < L) {
+        } else if(Math.sqrt(C*C + c*c) < W) {
             tooShortError();
             return true;
-        } else if(T > W) {
+        } else if(T > L) {
             noneFitError();
             return true;
-        } else if(c > L) {
+        } else if(c > W) {
             tooTallError();
             return true;
-        } else if(c > C || L > W) {
+        } else if(c > C || W > L) {
             wrongDimsError();
             return true;
         }
@@ -79,10 +79,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private void calculateStuff() {
         // Just define the stuff
-        D = Math.sqrt(c*c + C*C); // Simple pythagorean theorem
-        J = Math.sqrt(D*D - L*L); // Don't ya just love triangles
+        D = Math.sqrt(c*c + C*C);
+        J = Math.sqrt(D*D - W*W);
         y = Math.asin(c / D);
-        z = Math.asin(L / D);
+        z = Math.asin(W / D);
         x = z - y;
         a = c * Math.sin(x);
         b = c * Math.cos(x);
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         errorText.setVisibility(View.VISIBLE);
     }
     private void tooShortError() {
-        errorText.setText("The piece length must be more than the canvas width");
+        errorText.setText("The piece length and/or width is too short");
         errorText.setVisibility(View.VISIBLE);
     }
     private void noneFitError() {

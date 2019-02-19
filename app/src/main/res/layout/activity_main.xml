@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <EditText
-        android:id="@+id/pieceHeight"
+        android:id="@+id/pieceWidth"
         android:layout_width="93dp"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
@@ -80,7 +80,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent" />
     <EditText
-        android:id="@+id/canvasHeight"
+        android:id="@+id/canvasWidth"
         android:layout_width="93dp"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
@@ -113,7 +113,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/piece_height"
-        app:layout_constraintBottom_toTopOf="@+id/pieceHeight"
+        app:layout_constraintBottom_toTopOf="@+id/pieceWidth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
     <TextView
@@ -134,7 +134,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/canvas_height"
-        app:layout_constraintBottom_toTopOf="@+id/canvasHeight"
+        app:layout_constraintBottom_toTopOf="@+id/canvasWidth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
