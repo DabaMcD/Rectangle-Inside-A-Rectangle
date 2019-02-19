@@ -121,10 +121,10 @@ public class AnswerView extends View {
         canvas.drawRect(0, 0, L, W, paint);
     }
     private void drawCanvasMeasurements(Canvas canvas) {
-        // Vertical measurement
+        // Vertical measurement of width
         paint.setColor(orange);
         canvas.drawLine((float) (L * -0.05), 0, (float) (L * -0.2), 0, paint);
-        canvas.drawLine((float) (L * -0.05), W, (float) (W * -0.2), W, paint);
+        canvas.drawLine((float) (L * -0.05), W, (float) (L * -0.2), W, paint);
         float horizontalMidpoint = (float) (L * -0.125);
         canvas.drawLine(horizontalMidpoint, 0, horizontalMidpoint, W, paint);
 
@@ -144,9 +144,9 @@ public class AnswerView extends View {
         drawTextAndRect(String.valueOf(W), 0, 0, canvas);
         canvas.restore();
 
-        // Horizontal measurement
+        // Horizontal measurement of length
         canvas.drawLine(0, (float) (-L * 0.05), 0, (float) (-L * 0.2), paint);
-        canvas.drawLine(W, (float) (-L * 0.05), L, (float) (-L * 0.2), paint);
+        canvas.drawLine(L, (float) (-L * 0.05), L, (float) (-L * 0.2), paint);
         float verticalMidpoint = (float) (-L * 0.125);
         canvas.drawLine(0, verticalMidpoint, L, verticalMidpoint, paint);
         drawTextAndRect(String.valueOf(L), L / 2, verticalMidpoint, canvas);
