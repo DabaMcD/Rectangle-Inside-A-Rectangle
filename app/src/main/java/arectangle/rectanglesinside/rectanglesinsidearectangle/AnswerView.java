@@ -37,9 +37,9 @@ public class AnswerView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        // This setTextSize command can't be moved to the constructor because it
+        // This setTextSize command can't be moved to the constructor because it dependent on L, which is not defined before the constructor is run
         // The text size should never change after this
-        paint.setTextSize(c / 2); // todo: fiddle with setting this size based on L
+        paint.setTextSize(L / 15);
         paint.setColor(Color.DKGRAY);
         canvas.drawPaint(paint);
 
