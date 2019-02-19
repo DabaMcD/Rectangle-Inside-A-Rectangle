@@ -113,6 +113,7 @@ public class AnswerView extends View {
 
             i ++;
         }
+        // todo: fix the line below from going down too far
         canvas.drawLine(B, 0, B, (float) (-a * (i - 1) * 1.25 - a * 2), paint); // Line going up vertically from upper right corner of canvas
     }
     private void drawCanvas(Canvas canvas) {
@@ -137,6 +138,7 @@ public class AnswerView extends View {
         // I can't explain it at all.
         // As soon as it gets to 90 it gets blurry.
         // That's why I put 89.999 instead of 90.
+        // Floats are accurate to 6 or 7 digits, so don't add too many nines.
         canvas.rotate(89.999f);
 
         drawTextAndRect(String.valueOf(L), 0, 0, canvas);
