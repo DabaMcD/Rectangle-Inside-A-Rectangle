@@ -13,7 +13,7 @@ public class AnswerView extends View {
     // If you want to know what these one-letter variables mean, consult MainActivity lines 16-30
     private float C, B, L, W, c;
     private double x, // Is in radians
-            O, E, T, a, b;
+            O, E, T, a;
     private Paint paint;
     private int orange = Color.rgb(255, 127, 0);
 
@@ -73,7 +73,7 @@ public class AnswerView extends View {
 
         super.onDraw(canvas);
     }
-    void draw(float C, float B, float L, float W, float c, double x, double E, double O, double T, double a, double b) {
+    void draw(float C, float B, float L, float W, float c, double x, double E, double O, double T, double a) {
         this.C = C;
         this.B = B;
         this.L = L;
@@ -84,7 +84,6 @@ public class AnswerView extends View {
         this.O = O;
         this.T = T;
         this.a = a;
-        this.b = b;
         invalidate();
         requestLayout();
     }
@@ -113,7 +112,6 @@ public class AnswerView extends View {
 
             i ++;
         }
-        // todo: fix the line below from going down too far
         canvas.drawLine(B, (float) (-a * 0.5), B, (float) (-a * (i - 1) * 1.25 - a * 2), paint); // Line going up vertically from upper right corner of canvas
     }
     private void drawCanvas(Canvas canvas) {

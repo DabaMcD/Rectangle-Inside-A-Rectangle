@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("O", O);
         intent.putExtra("T", T);
         intent.putExtra("a", a);
-        intent.putExtra("b", b);
         startActivity(intent);
     }
 }
