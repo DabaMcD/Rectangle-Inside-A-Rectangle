@@ -92,27 +92,27 @@ public class MainActivity extends AppCompatActivity {
         O = c / Math.tan(x);
     }
     private void aboveZeroError() {
-        errorText.setText("All values must be more than or equal to zero");
+        errorText.setText(R.string.aboveZeroErrorMessage);
         errorText.setVisibility(View.VISIBLE);
     }
     private void tooShortError() {
-        errorText.setText("The piece length and/or width is too short");
+        errorText.setText(R.string.tooShortErrorMessage);
         errorText.setVisibility(View.VISIBLE);
     }
     private void noneFitError() {
-            errorText.setText("The piece cannot fit in the canvas at all");
+            errorText.setText(R.string.noneFitErrorMessage);
             errorText.setVisibility(View.VISIBLE);
     }
     private void boxEmptyError() {
-        errorText.setText("All boxes must be filled out");
+        errorText.setText(R.string.boxEmptyErrorMessage);
         errorText.setVisibility(View.VISIBLE);
     }
     private void tooTallError() {
-        errorText.setText("The piece is too wide to fit it the canvas");
+        errorText.setText(R.string.tooTallErrorMessage);
         errorText.setVisibility(View.VISIBLE);
     }
     private void wrongDimsError() {
-        errorText.setText("The length is always the longer dimension");
+        errorText.setText(R.string.wrongDimsErrorMessage);
         errorText.setVisibility(View.VISIBLE);
     }
     private void showAnswers() {

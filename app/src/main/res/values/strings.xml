@@ -9,4 +9,10 @@
     <string name="_19_5">19.5</string>
     <string name="_4">4</string>
     <string name="go">GO</string>
+    <string name="wrongDimsErrorMessage">The length is always the longer dimension</string>
+    <string name="tooTallErrorMessage">The piece is too wide to fit it the canvas</string>
+    <string name="boxEmptyErrorMessage">All boxes must be filled out</string>
+    <string name="noneFitErrorMessage">The piece cannot fit in the canvas at all</string>
+    <string name="tooShortErrorMessage">The piece length and/or width is too short</string>
+    <string name="aboveZeroErrorMessage">All values must be more than or equal to zero</string>
 </resources>
