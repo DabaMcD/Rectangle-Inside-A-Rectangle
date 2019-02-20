@@ -41,7 +41,8 @@ public class AnswerView extends View {
         // The text size should never change after this
         paint.setTextSize(L / 15);
         paint.setColor(Color.DKGRAY);
-        canvas.drawPaint(paint);
+        paint.setStrokeWidth(L / 200);
+        canvas.drawPaint(paint); // Makes a dark gray background
 
         // Draw stuff on upper canvas
         canvas.save();
@@ -89,7 +90,6 @@ public class AnswerView extends View {
     }
     private void drawPiecesAndMeasurements(Canvas canvas) {
         paint.setColor(orange);
-        paint.setStrokeWidth(B / 100);
         int i = 0; // This is a while loop so that the variable "i" can be used later
         while(T + E * i <= L) {
             canvas.save();
@@ -155,7 +155,37 @@ public class AnswerView extends View {
         canvas.save();
         canvas.translate(L - B, 0);
         canvas.rotate((float) Math.toDegrees(x));
+        paint.setColor(orange);
         canvas.drawRect(0, 0, C, c, paint);
+
+        // Draw lines for measurement of longer dimension
+        canvas.drawLine(0, c, 0, (float) (c + L * 0.15), paint); // Upper/left line
+        canvas.drawLine(C, c, C, (float) (c + L * 0.15), paint);// Lower/right line
+        float midPoint = (float) (c + L * 0.075);
+        canvas.drawLine(0, midPoint, C, midPoint, paint); // Line connecting the other two
+
+        // Draw text and white rect
+        canvas.save();
+        canvas.translate(C / 2, midPoint);
+        paint.setColor(Color.WHITE);
+        canvas.drawRect(-paint.measureText(String.valueOf(C)) * 3f / 4f, -paint.getTextSize() / 2f, paint.measureText(String.valueOf(C)) * 3f / 4f, paint.getTextSize() / 2f, paint);
+        paint.setColor(orange);
+        canvas.translate(0, paint.getTextSize() / 3f);
+        canvas.drawText(String.valueOf(C), 0, 0, paint);
+        canvas.restore();
+
+        // Draw lines for measurement of shorter dimension
+        paint.setColor(orange);
+        canvas.drawLine(C, 0, (float) (C + L * 0.2), 0, paint);
+        canvas.drawLine(C, c, (float) (C + L * 0.2), c, paint);
+        midPoint = C + L * 0.1f;
+        canvas.drawLine(midPoint, 0, midPoint, c, paint);
+
+        canvas.save();
+        canvas.translate(midPoint, (float) (c / 2d));
+        canvas.rotate(-90f);
+        drawTextAndRect(String.valueOf(c), 0, 0, canvas);
+        canvas.restore();
 
         canvas.restore();
     }
@@ -170,7 +200,7 @@ public class AnswerView extends View {
         paint.setTextAlign(Paint.Align.CENTER);
     }
     private void drawOffsetMeasurement(Canvas canvas) {
-        paint.setStrokeWidth(B / 100);
+        paint.setStrokeWidth(L / 200);
         canvas.save();
         canvas.translate((float) (B - a), B);
         canvas.rotate((float) Math.toDegrees(x));
@@ -185,10 +215,13 @@ public class AnswerView extends View {
         canvas.save();
         canvas.translate(x, y);
         paint.setColor(Color.DKGRAY);
-        canvas.drawRect(-paint.measureText(text) * 3 / 4, -paint.getTextSize() / 2, paint.measureText(text) * 3 / 4, paint.getTextSize() / 2, paint);
+        canvas.drawRect(-paint.measureText(text) * 3f / 4f, -paint.getTextSize() / 2f, paint.measureText(text) * 3f / 4f, paint.getTextSize() / 2f, paint);
         paint.setColor(orange);
-        canvas.translate(0, paint.getTextSize() / 3);
-        canvas.drawText(text, 0, 0, paint);
+        canvas.translate(0, paint.getTextSize() / 3f);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+
+        canvas.drawText(text, 0 - paint.measureText(text) / 2, 0, paint);
         canvas.restore();
     }
 }
