@@ -114,7 +114,7 @@ public class AnswerView extends View {
             i ++;
         }
         // todo: fix the line below from going down too far
-        canvas.drawLine(B, 0, B, (float) (-a * (i - 1) * 1.25 - a * 2), paint); // Line going up vertically from upper right corner of canvas
+        canvas.drawLine(B, (float) (-a * 0.5), B, (float) (-a * (i - 1) * 1.25 - a * 2), paint); // Line going up vertically from upper right corner of canvas
     }
     private void drawCanvas(Canvas canvas) {
         paint.setColor(Color.WHITE);
