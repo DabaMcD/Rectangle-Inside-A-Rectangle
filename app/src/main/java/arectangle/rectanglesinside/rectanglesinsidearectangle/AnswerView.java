@@ -164,7 +164,7 @@ public class AnswerView extends View {
 
         // Draw text and white rect
         canvas.save();
-        canvas.translate(C / 2, midPoint);
+        canvas.translate(C / 2f, midPoint);
         paint.setColor(Color.WHITE);
         canvas.drawRect(-paint.measureText(String.valueOf(C)) * 3f / 4f, -paint.getTextSize() / 2f, paint.measureText(String.valueOf(C)) * 3f / 4f, paint.getTextSize() / 2f, paint);
         paint.setColor(orange);
@@ -191,9 +191,9 @@ public class AnswerView extends View {
         float arcRad = B / 6;
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(arcRad / 6);
-        paint.setTextAlign(Paint.Align.LEFT);
         canvas.drawArc(-arcRad, -arcRad, arcRad, arcRad, 0, (float) Math.toDegrees(x), false, paint);
         paint.setStyle(Paint.Style.FILL);
+        paint.setTextAlign(Paint.Align.LEFT);
         canvas.drawText(String.valueOf(Math.round(Math.toDegrees(x) * 100d) / 100d) + "°", (float) (Math.cos(x / 2) * arcRad * 1.5), (float) (Math.sin(x / 2) * arcRad * 1.5 + paint.getTextSize() * 2 / 3), paint);
         paint.setTextAlign(Paint.Align.CENTER);
     }
@@ -216,10 +216,7 @@ public class AnswerView extends View {
         canvas.drawRect(-paint.measureText(text) * 3f / 4f, -paint.getTextSize() / 2f, paint.measureText(text) * 3f / 4f, paint.getTextSize() / 2f, paint);
         paint.setColor(orange);
         canvas.translate(0, paint.getTextSize() / 3f);
-
-        paint.setTextAlign(Paint.Align.LEFT);
-
-        canvas.drawText(text, 0 - paint.measureText(text) / 2, 0, paint);
+        canvas.drawText(text, 0, 0, paint);
         canvas.restore();
     }
 }
