@@ -61,14 +61,12 @@ public class AnswerView extends View {
 
         // Draw stuff on lower canvas
         canvas.save();
-
         // Do some translating and scaling
-        canvas.translate(Screen.width / 4f, Screen.height * 3f / 4f);
+        canvas.translate(Screen.width / 4f, Screen.height * 5 / 9f);
         canvas.scale(Screen.width / (2 * L), Screen.width / (2 * L));
         drawCanvas(canvas);
         drawCanvasMeasurements(canvas);
         drawSinglePieceWithMeasurements(canvas);
-
         canvas.restore();
 
         super.onDraw(canvas);
